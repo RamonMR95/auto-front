@@ -3,7 +3,7 @@ export class Car {
 
   constructor(
     public brand: string,
-    public registration: number,
+    public registration: Date,
     public country: string
   ) {}
 }

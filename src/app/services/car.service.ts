@@ -17,6 +17,6 @@ export class CarService {
   }
 
   getCar(id: string): Promise<Car> {
-    return this.httpClient.get<Car>(`${API_URL}/id`).toPromise();
+    return this.httpClient.get<Car>(`${API_URL}/${id}`).toPromise();
   }
 }

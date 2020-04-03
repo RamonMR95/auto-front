@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let car of cars">
-      <td>{{ (car?.id).substring(0, 6) }}</td>
+      <td [routerLink]="['/car/', car?.id]">{{ (car?.id).substring(0, 6) }}</td>
       <td>{{ car?.brand }}</td>
       <td>{{ car?.registration | date: "MM/dd/yy" }}</td>
       <td>{{ car?.country }}</td>

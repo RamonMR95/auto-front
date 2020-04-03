@@ -12,11 +12,11 @@ import { API_URL } from "../config/config";
 export class CarService {
   constructor(private httpClient: HttpClient) {}
 
-  getCars(): Observable<Car[]> {
-    return this.httpClient.get<Car[]>(API_URL);
+  getCars(): Promise<Car[]> {
+    return this.httpClient.get<Car[]>(API_URL).toPromise();
   }
 
-  getCar(id: string): Observable<Car> {
-    return this.httpClient.get<Car>(`${API_URL}/id`);
+  getCar(id: string): Promise<Car> {
+    return this.httpClient.get<Car>(`${API_URL}/id`).toPromise();
   }
 }

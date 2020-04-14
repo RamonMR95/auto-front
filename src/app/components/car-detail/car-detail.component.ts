@@ -27,4 +27,8 @@ export class CarDetailComponent implements OnInit {
   getCar(id: string): void {
     this.carService.getCar(id).then(val => (this.car = val));
   }
+
+  deleteCar(id: string): void {
+    this.carService.deleteCar(id).then(() => this.router.navigate(["/cars"]));
+  }
 }

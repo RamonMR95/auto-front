@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-card
+    class="mat-elevation-z4"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxFlex="30"
+    fxFlex.xs="80"
+  >
+    <mat-card-header>
+      <mat-card-title>
+        <p class="id-text">ID: {{ (car?.id).substring(0, 6) }}</p>
+        {{ car?.brand }}
+      </mat-card-title>
+      <mat-card-subtitle fxLayout="column">
+          {{ car?.country }}
+          {{ car?.registration | date: "MM/dd/yy" }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions fxLayout="row">
+      <button mat-button [routerLink]="['/car/edit', car?.id]">EDIT</button>
+      <button mat-button (click)="deleteCar(car?.id)">DELETE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

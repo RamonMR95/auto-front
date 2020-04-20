@@ -1,18 +1,46 @@
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Brand</th>
-      <th>Registration</th>
-      <th>Country</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let car of cars">
-      <td [routerLink]="['/car/', car?.id]">{{ (car?.id).substring(0, 6) }}</td>
-      <td>{{ car?.brand }}</td>
-      <td>{{ car?.registration | date: "MM/dd/yy" }}</td>
-      <td>{{ car?.country }}</td>
-    </tr>
-  </tbody>
-</table>
+<button mat-raised-button color="primary" routerLink="/create">Create</button>
+
+<mat-form-field class="py-4">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. BMW" />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">
+        {{ (row?.id).substring(0, 6) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Brand</th>
+      <td mat-cell *matCellDef="let row">{{ row?.brand }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="registration">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Registration</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row?.registration | date: "MM/dd/yy" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.country">
+        {{ row?.country }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [routerLink]="['/car/', row?.id]"
+    ></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

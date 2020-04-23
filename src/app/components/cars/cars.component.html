@@ -2,14 +2,13 @@
 
 <mat-form-field class="py-4">
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. BMW" />
+  <input [(ngModel)]="filter" matInput (keyup)="applyBackendFilter($event)" placeholder="Ex. BMW" />
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
-
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortChange($event)">
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <th mat-header-cell *matHeaderCellDef>ID</th>
       <td mat-cell *matCellDef="let row">
         {{ (row?.id).substring(0, 6) }}
       </td>
@@ -28,19 +27,15 @@
     </ng-container>
 
     <ng-container matColumnDef="country">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+      <th mat-header-cell *matHeaderCellDef>Country</th>
       <td mat-cell *matCellDef="let row" [style.color]="row.country">
         {{ row?.country }}
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      [routerLink]="['/car/', row?.id]"
-    ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" [routerLink]="['/car/', row?.id]"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator [length]="length" (page)="setOffset($event)" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

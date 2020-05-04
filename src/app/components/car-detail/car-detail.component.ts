@@ -8,7 +8,7 @@ import { CarService } from "src/app/services/car.service";
 @Component({
   selector: "app-car-detail",
   templateUrl: "./car-detail.component.html",
-  styleUrls: ["./car-detail.component.css"]
+  styleUrls: ["./car-detail.component.css"],
 })
 export class CarDetailComponent implements OnInit {
   car: Car;
@@ -25,10 +25,13 @@ export class CarDetailComponent implements OnInit {
   }
 
   getCar(id: string): void {
-    this.carService.getCar(id).then(val => (this.car = val));
+    this.carService.getCar(id).then((val) => (this.car = val));
   }
 
   deleteCar(id: string): void {
-    this.carService.deleteCar(id).then(() => this.router.navigate(["/cars"]));
+    this.carService.deleteCar(id).then(() => {
+      this.router.navigate(["/cars"]);
+    });
   }
+
 }

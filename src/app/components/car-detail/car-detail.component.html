@@ -9,13 +9,19 @@
     <mat-card-header>
       <mat-card-title>
         <p class="id-text">ID: {{ (car?.id).substring(0, 6) }}</p>
-        {{ car?.brand }}
+        {{ car?.brand.name }}
       </mat-card-title>
       <mat-card-subtitle fxLayout="column">
-          {{ car?.country }}
-          {{ car?.registration | date: "MM/dd/yy" }}
+        {{ car?.country.name }}
+        {{ car?.registration | date: "MM/dd/yy" }}
       </mat-card-subtitle>
     </mat-card-header>
+    <mat-card-content>
+      <div>
+        <p>Model: {{ car?.model }}</p>
+        <p>Color: {{ car?.color }}</p>
+      </div>
+    </mat-card-content>
     <mat-card-actions fxLayout="row">
       <button mat-button [routerLink]="['/car/edit', car?.id]">EDIT</button>
       <button mat-button (click)="deleteCar(car?.id)">DELETE</button>

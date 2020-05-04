@@ -13,7 +13,14 @@ import { MatSort } from "@angular/material/sort";
   styleUrls: ["./cars.component.css"],
 })
 export class CarsComponent implements OnInit {
-  displayedColumns: string[] = ["id", "brand", "registration", "country"];
+  displayedColumns: string[] = [
+    "id",
+    "brand",
+    "country",
+    "model",
+    "color",
+    "registration",
+  ];
   dataSource: MatTableDataSource<Car>;
   cars: Car[];
   page: number = 1;
@@ -25,7 +32,7 @@ export class CarsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService) {}
 
   ngOnInit(): void {
     this.pageSize = this.paginator.pageSize || 5;
@@ -70,10 +77,12 @@ export class CarsComponent implements OnInit {
       this.orderBy = "-" + field;
     }
 
-    this.carService.getCars(this.page, this.pageSize, this.filter, this.orderBy).then((res) => {
-      this.cars = res.cars;
-      this.length = res.total_count;
-      this.dataSource.data = this.cars;
-    });
+    this.carService
+      .getCars(this.page, this.pageSize, this.filter, this.orderBy)
+      .then((res) => {
+        this.cars = res.cars;
+        this.length = res.total_count;
+        this.dataSource.data = this.cars;
+      });
   }
 }

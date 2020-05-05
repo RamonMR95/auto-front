@@ -9,6 +9,6 @@ export class Car {
 		public color: string,
 		public registration: Date,
 		public country: Country,
-		public carComponents: Set<string>
+		public carComponents: string[]
 	) {}
 }

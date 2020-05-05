@@ -73,9 +73,13 @@
 
         <div fxLayout="column">
           <h3>Car components</h3>
-          <mat-checkbox color="primary">Wheel</mat-checkbox>
-          <mat-checkbox color="primary">Leather</mat-checkbox>
-          <mat-checkbox color="primary">air conditioner</mat-checkbox>
+          <mat-checkbox
+            *ngFor="let cb of allComponents"
+            color="primary"
+            [checked]="cb.checked"
+            (change)="manageCheckedChange($event, cb.name)"
+            >{{ cb.name }}</mat-checkbox
+          >
         </div>
       </div>
     </form>

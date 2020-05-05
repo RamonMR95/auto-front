@@ -22,6 +22,16 @@
         <p>Color: {{ car?.color }}</p>
       </div>
     </mat-card-content>
+    <div fxLayout="column">
+      <h4>Components</h4>
+      <mat-checkbox
+        *ngFor="let c of car?.carComponents"
+        color="primary"
+        checked="checked"
+        [disabled]="true"
+        >{{ c }}</mat-checkbox
+      >
+    </div>
     <mat-card-actions fxLayout="row">
       <button
         mat-raised-button

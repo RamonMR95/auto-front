@@ -23,8 +23,16 @@
       </div>
     </mat-card-content>
     <mat-card-actions fxLayout="row">
-      <button mat-button [routerLink]="['/car/edit', car?.id]">EDIT</button>
-      <button mat-button (click)="deleteCar(car?.id)">DELETE</button>
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/car/edit', car?.id]"
+      >
+        EDIT
+      </button>
+      <button mat-raised-button color="warn" (click)="deleteCar(car?.id)">
+        DELETE
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

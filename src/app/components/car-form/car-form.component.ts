@@ -14,6 +14,7 @@ import { Brand } from "src/app/models/brand.model";
 import { Country } from "src/app/models/country.model";
 import { CountryService } from "../../services/country.service";
 import { BrandService } from "../../services/brand.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-car-form",
@@ -34,7 +35,8 @@ export class CarFormComponent implements OnInit {
     private brandService: BrandService,
     private router: Router,
     private route: ActivatedRoute,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -85,13 +87,29 @@ export class CarFormComponent implements OnInit {
       );
 
       if (this.id == undefined) {
-        let newCar = await this.carService.createCar(car).then(() => {
+        await this.carService.createCar(car).then((value) => {
+          let newCar = value;
+          this.snackBar.open(
+            `Created car with id: ${newCar.id.substring(0, 6)}`,
+            "X",
+            {
+              duration: 2000,
+            }
+          );
           this.router.navigate(["/cars"]);
         });
       } else {
-        await this.carService
-          .updateCar(this.id, car)
-          .then(() => this.router.navigate(["/car/", this.id]));
+        await this.carService.updateCar(this.id, car).then((value) => {
+          let newCar = value;
+          this.snackBar.open(
+            `Edited car with id: ${newCar.id.substring(0, 6)}`,
+            "X",
+            {
+              duration: 2000,
+            }
+          );
+          this.router.navigate(["/car/", this.id]);
+        });
       }
     }
   }

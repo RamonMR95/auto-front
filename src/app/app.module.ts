@@ -18,9 +18,11 @@ import { BrandService } from './services/brand.service';
 
 import { DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
-	declarations: [ AppComponent, CarsComponent, CarDetailComponent, CarFormComponent, NavbarComponent ],
+	declarations: [ AppComponent, CarsComponent, CarDetailComponent, CarFormComponent, NavbarComponent, DialogComponent ],
+	entryComponents: [ DialogComponent ],
 	imports: [
 		BrowserModule,
 		HttpClientModule,

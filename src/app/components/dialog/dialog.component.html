@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+    <mat-dialog-content>
+      {{ data.content }}
+    </mat-dialog-content>
+    <mat-dialog-actions class="py-5" fxLayout="row">
+      <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="true">
+        Remove
+      </button>
+    </mat-dialog-actions>
+</div>

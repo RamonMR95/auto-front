@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { Car } from "../models/car.model";
 
@@ -18,8 +17,13 @@ const httpOptions = {
 export class CarService {
   constructor(private httpClient: HttpClient) {}
 
-  getCars(page: number, size: number, filterBy?: string, orderBy?: string): Promise<any> {
-    let query = `${API_URL}?page=${page}&size=${size}`;
+  getCars(
+    page: number,
+    size: number,
+    filterBy?: string,
+    orderBy?: string
+  ): Promise<any> {
+    let query = `${API_URL}/cars?page=${page}&size=${size}`;
     if (filterBy != null && filterBy != "") {
       query += `&filterBy=${filterBy}`;
     }
@@ -30,22 +34,24 @@ export class CarService {
   }
 
   getCar(id: string): Promise<Car> {
-    return this.httpClient.get<Car>(`${API_URL}/${id}`).toPromise();
+    return this.httpClient.get<Car>(`${API_URL}/cars/${id}`).toPromise();
   }
 
   createCar(car: Car): Promise<Car> {
-    return this.httpClient.post<Car>(API_URL, car, httpOptions).toPromise();
+    return this.httpClient
+      .post<Car>(`${API_URL}/cars`, car, httpOptions)
+      .toPromise();
   }
 
   updateCar(id: string, car: Car): Promise<Car> {
     return this.httpClient
-      .put<Car>(`${API_URL}/${id}`, car, httpOptions)
+      .put<Car>(`${API_URL}/cars/${id}`, car, httpOptions)
       .toPromise();
   }
 
   deleteCar(id: string): Promise<Car> {
     return this.httpClient
-      .delete<Car>(`${API_URL}/${id}`, httpOptions)
+      .delete<Car>(`${API_URL}/cars/${id}`, httpOptions)
       .toPromise();
   }
 }

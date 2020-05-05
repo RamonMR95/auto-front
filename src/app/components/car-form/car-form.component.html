@@ -1,33 +1,87 @@
-<mat-card>
-  <h4>{{ title }}</h4>
+<div fxLayoutAlign="center">
+  <mat-card fxFlex="70">
+    <form [formGroup]="form" (submit)="generateCar()">
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <div>
+          <h4>{{ title }}</h4>
+          <div>
+            <mat-form-field appearance="outline" required>
+              <mat-label>Brand</mat-label>
+              <mat-select [formControl]="form.controls.brand" required>
+                <mat-option *ngFor="let b of brands" [value]="b.name">
+                  {{ b.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.controls.brand.hasError('required')"
+                >Please choose a brand</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Model</mat-label>
+              <input matInput name="model" formControlName="model" required />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Color</mat-label>
+              <input matInput name="color" formControlName="color" required />
+            </mat-form-field>
+          </div>
 
-  <form [formGroup]="form" (submit)="generateCar()">
-    <div class="example-container">
-      <mat-form-field appearance="fill">
-        <mat-label>Brand</mat-label>
-        <input matInput name="brand" formControlName="brand" />
-      </mat-form-field>
-    </div>
-    <div class="example-container">
-      <mat-form-field class="example-full-width">
-        <mat-label>Choose a date</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker"
-          formControlName="registration"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div class="example-container">
-      <mat-form-field appearance="fill">
-        <mat-label>Country</mat-label>
-        <input matInput name="country" formControlName="country" />
-      </mat-form-field>
-    </div>
-    <div class="example-button-row">
-      <button type="submit" mat-raised-button color="primary">Submit</button>
-    </div>
-  </form>
-</mat-card>
+          <div>
+            <mat-form-field appearance="outline" required>
+              <mat-label>Country</mat-label>
+              <mat-select [formControl]="form.controls.country" required>
+                <mat-option *ngFor="let c of countries" [value]="c.name">
+                  {{ c.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.controls.country.hasError('required')"
+                >Please choose a country</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="registration"
+                required
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="!form.valid"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+
+        <div fxLayout="column">
+          <h3>Car components</h3>
+          <mat-checkbox
+            *ngFor="let cb of allComponents"
+            color="primary"
+            [checked]="cb.checked"
+            (change)="manageCheckedChange($event, cb.name)"
+            >{{ cb.name }}</mat-checkbox
+          >
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

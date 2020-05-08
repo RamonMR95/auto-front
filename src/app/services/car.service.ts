@@ -1,15 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 import { Car } from "../models/car.model";
 
 import { API_URL } from "../config/config";
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json",
-  }),
-};
 
 @Injectable({
   providedIn: "root",
@@ -38,20 +32,14 @@ export class CarService {
   }
 
   createCar(car: Car): Promise<Car> {
-    return this.httpClient
-      .post<Car>(`${API_URL}/cars`, car, httpOptions)
-      .toPromise();
+    return this.httpClient.post<Car>(`${API_URL}/cars`, car).toPromise();
   }
 
   updateCar(id: string, car: Car): Promise<Car> {
-    return this.httpClient
-      .put<Car>(`${API_URL}/cars/${id}`, car, httpOptions)
-      .toPromise();
+    return this.httpClient.put<Car>(`${API_URL}/cars/${id}`, car).toPromise();
   }
 
   deleteCar(id: string): Promise<Car> {
-    return this.httpClient
-      .delete<Car>(`${API_URL}/cars/${id}`, httpOptions)
-      .toPromise();
+    return this.httpClient.delete<Car>(`${API_URL}/cars/${id}`).toPromise();
   }
 }

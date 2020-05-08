@@ -1,14 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-colors">
+<nav class="navbar navbar-expand-lg navbar-colors justify-content-between">
   <a class="navbar-brand link-colors" [routerLink]="['/cars']">Cars</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="mr-sm-2">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="authService.login()"
+      *ngIf="!authService.isAuthenticated()"
+    >
+      Log In
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="authService.logout()"
+      *ngIf="authService.isAuthenticated()"
+    >
+      Log Out
+    </button>
+  </div>
 </nav>

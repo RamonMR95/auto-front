@@ -19,16 +19,15 @@ export class AuthService {
     this.auth0.authorize();
   }
 
-  public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = "";
-        this.setSession(authResult);
-      } else if (err) {
-        // Error dialog ie
-      }
-      this.router.navigate(["/"]);
-    });
+  public async handleAuthentication(): Promise<any>{
+      await this.auth0.parseHash((err, authResult) => {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          window.location.hash = "";
+          this.setSession(authResult);
+        } else if (err) {
+          // Error dialog ie
+        }
+      });
   }
 
   private setSession(authResult): void {

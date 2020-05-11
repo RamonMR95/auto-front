@@ -10,7 +10,7 @@ import { CallbackComponent } from "./components/callback/callback.component";
 export const appRoutes: Routes = [
   { path: "", redirectTo: "/cars", pathMatch: "full" },
   { path: "cars", component: CarsComponent, canActivate: [AuthGuard] },
-  { path: "callback", component: CallbackComponent, canActivate: [AuthGuard] },
+  { path: "callback", component: CallbackComponent },
   { path: "car/:id", component: CarDetailComponent, canActivate: [AuthGuard] },
   { path: "create", component: CarFormComponent, canActivate: [AuthGuard] },
   {

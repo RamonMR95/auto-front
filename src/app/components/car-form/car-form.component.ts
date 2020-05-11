@@ -173,8 +173,6 @@ export class CarFormComponent implements OnInit {
 
   manageCheckedChange(event: MatCheckboxChange, cbName: string): void {
     this.allComponents.forEach((c) => {
-      console.log(event);
-      console.log(this.allComponents);
       if (c.name === cbName) {
         c.checked = event.checked;
       }

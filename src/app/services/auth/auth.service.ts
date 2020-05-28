@@ -3,6 +3,7 @@ import { AUTH_CONFIG } from "./auth0-variables";
 import { Router } from "@angular/router";
 import auth0 from "auth0-js";
 import { HttpClient } from "@angular/common/http";
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -53,6 +54,6 @@ export class AuthService {
 
   logoutFromAuth0(): void {
     window.location.href =
-      "https://dev-v4wkhaae.eu.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A4200&client_id=aLncGh3VIq29SbCTUY3l5P7FblxTBTnV";
+      `https://${environment.AUTH0_HOST}/logout?returnTo=${environment.AUTH0_LOGOUT_URL}&client_id=${environment.AUTH0_CLIENT_ID}`;
   }
 }
